@@ -3,6 +3,8 @@ package com.mainaak.pocsecretmanager.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,4 +58,37 @@ public class DatabaseConfig {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper;
     }
+
+    /*
+    /* @Bean
+//    @ConditionalOnExpression("!'${dataSource.username:}'.isEmpty() && !'${dataSource.password:}'.isEmpty()")
+    @ConditionalOnExpression("${secretManagerCreds:false}")
+    public DataSource dataSource(@Value("${jdbc.driverClassName}") String driverClassName, @Value("$mettl.props{dataSource.url}") String url,
+                                 @Value("$mettl.props{dataSource.maxPoolSize:20}") String poolSize, @Value("${dataSource.username:${hikariDataSource.username}}") String username,
+                                 @Value("${dataSource.password:${hikariDataSource.password}}") String password) {
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setJdbcUrl(url);
+        dataSource.setMaximumPoolSize(Integer.parseInt(poolSize));
+        return dataSource;
+    }*/
+
+    /*
+    @Bean(name = "dataSource")
+    @ConditionalOnMissingBean(name = "dataSource")
+    public DataSource dataSourceAlternate(@Value("$mettl.props{jdbc.driverClassName}") String driverClassName, @Value("$mettl.props{dataSource.url}") String url,
+                                          @Value("$mettl.props{dataSource.maxPoolSize:20}") String poolSize, @Value("$mettl.props{dataSource.username}") String username,
+                                          @Value("$mettl.props{dataSource.password}") String password) {
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setJdbcUrl(url);
+        dataSource.setMaximumPoolSize(Integer.parseInt(poolSize));
+        return dataSource;
+    }
+
+     */
 }
