@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ImportResource;
 public class PocSecretManagerApplication {
 
     public static void main(String[] args) {
-//        System.setProperty("aws.secrets-manager.prefix", "mainaak-poc-11-decc");
         SpringApplication.run(PocSecretManagerApplication.class, args);
     }
 
